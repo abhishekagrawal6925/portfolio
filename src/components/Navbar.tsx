@@ -80,11 +80,10 @@ export default function Navbar({ onOpenConsultation }: NavbarProps) {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-200 ${
-        isScrolled
-          ? "bg-[#0F3040]/95 backdrop-blur-md border-b border-[#D99B7F]/20 shadow-lg py-2.5"
-          : "bg-transparent py-3.5"
-      }`}
+      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-200 ${isScrolled
+        ? "bg-[#0F3040]/95 backdrop-blur-md border-b border-[#D99B7F]/20 shadow-lg py-2.5"
+        : "bg-transparent py-3.5"
+        }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
         {/* Clean Firm Brand Section with PA CO Logo */}
@@ -93,10 +92,8 @@ export default function Navbar({ onOpenConsultation }: NavbarProps) {
           onClick={(e) => handleNavClick(e, "#hero")}
           className="flex items-center gap-2.5 group py-0.5"
         >
-          <div className="w-9 h-9 rounded-xl bg-[#D99B7F] text-[#0F3040] flex flex-col items-center justify-center font-sans shadow-sm select-none leading-none shrink-0 p-1">
-            <span className="text-xs font-bold tracking-tight text-[#0F3040]">PA</span>
-            <div className="w-4 h-[1px] bg-[#0F3040]/40 my-[1px] rounded-full" />
-            <span className="text-[8px] font-bold tracking-tight text-[#0F3040]">CO</span>
+          <div className="h-9 px-2.5 rounded-xl bg-[#D99B7F] text-[#0F3040] flex items-center justify-center gap-1 font-sans shadow-sm select-none leading-none shrink-0">
+            <span className="text-xs font-bold tracking-tight text-[#0F3040]">PA&CO</span>
           </div>
           <div className="flex flex-col justify-center">
             <span className="font-sans font-bold text-sm sm:text-base tracking-wide text-white uppercase leading-tight group-hover:text-[#D99B7F] transition-colors">
@@ -117,9 +114,8 @@ export default function Navbar({ onOpenConsultation }: NavbarProps) {
                 key={link.name}
                 href={link.href}
                 onClick={(e) => handleNavClick(e, link.href)}
-                className={`relative px-3 py-1.5 text-xs font-medium transition-colors ${
-                  isActive ? "text-[#D99B7F] font-semibold" : "text-[#FAF2EE]/80 hover:text-white"
-                }`}
+                className={`relative px-3 py-1.5 text-xs font-medium transition-colors ${isActive ? "text-[#D99B7F] font-semibold" : "text-[#FAF2EE]/80 hover:text-white"
+                  }`}
               >
                 {link.name}
                 {isActive && (
@@ -185,11 +181,10 @@ export default function Navbar({ onOpenConsultation }: NavbarProps) {
                       key={link.name}
                       href={link.href}
                       onClick={(e) => handleNavClick(e, link.href)}
-                      className={`py-3 text-sm font-medium px-3.5 rounded-xl transition-colors flex items-center justify-between touch-manipulation ${
-                        isActive
-                          ? "bg-slate-100 text-slate-900 font-semibold"
-                          : "text-slate-800 hover:bg-gray-50 active:bg-gray-100"
-                      }`}
+                      className={`py-3 text-sm font-medium px-3.5 rounded-xl transition-colors flex items-center justify-between touch-manipulation ${isActive
+                        ? "bg-slate-100 text-slate-900 font-semibold"
+                        : "text-slate-800 hover:bg-gray-50 active:bg-gray-100"
+                        }`}
                     >
                       <span>{link.name}</span>
                       {isActive && (

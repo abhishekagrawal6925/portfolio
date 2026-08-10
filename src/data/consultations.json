@@ -1,0 +1,288 @@
+{
+  "availability": {
+    "durationMinutes": 30,
+    "days": [
+      {
+        "dayOfWeek": 1,
+        "dayName": "Monday",
+        "enabled": true,
+        "ranges": [
+          {
+            "id": "mon-1",
+            "startTime": "10:00",
+            "endTime": "17:00"
+          }
+        ]
+      },
+      {
+        "dayOfWeek": 2,
+        "dayName": "Tuesday",
+        "enabled": true,
+        "ranges": [
+          {
+            "id": "tue-1",
+            "startTime": "10:00",
+            "endTime": "17:00"
+          }
+        ]
+      },
+      {
+        "dayOfWeek": 3,
+        "dayName": "Wednesday",
+        "enabled": false,
+        "ranges": [
+          {
+            "id": "wed-1",
+            "startTime": "10:00",
+            "endTime": "17:00"
+          }
+        ]
+      },
+      {
+        "dayOfWeek": 4,
+        "dayName": "Thursday",
+        "enabled": true,
+        "ranges": [
+          {
+            "id": "thu-1",
+            "startTime": "10:00",
+            "endTime": "17:00"
+          }
+        ]
+      },
+      {
+        "dayOfWeek": 5,
+        "dayName": "Friday",
+        "enabled": true,
+        "ranges": [
+          {
+            "id": "fri-1",
+            "startTime": "10:00",
+            "endTime": "15:00"
+          }
+        ]
+      },
+      {
+        "dayOfWeek": 6,
+        "dayName": "Saturday",
+        "enabled": false,
+        "ranges": [
+          {
+            "id": "sat-1",
+            "startTime": "10:00",
+            "endTime": "17:00"
+          }
+        ]
+      },
+      {
+        "dayOfWeek": 0,
+        "dayName": "Sunday",
+        "enabled": false,
+        "ranges": [
+          {
+            "id": "sun-1",
+            "startTime": "10:00",
+            "endTime": "17:00"
+          }
+        ]
+      }
+    ],
+    "updatedAt": "2026-08-08T09:16:01.678Z"
+  },
+  "bookings": [
+    {
+      "customerName": "Sarvesh",
+      "customerEmail": "shahanesarvesh45@gmail.com",
+      "customerPhone": "7507981647",
+      "requestedDate": "2026-08-11",
+      "requestedTime": "10:30",
+      "duration": 30,
+      "consultationMode": "Online Video Call",
+      "service": "Income Tax Planning & Filing",
+      "message": "I got scammed",
+      "status": "ACCEPTED",
+      "id": "BKG-2026-5993",
+      "createdAt": "2026-08-10T15:19:25.146Z",
+      "updatedAt": "2026-08-10T15:20:47.113Z"
+    },
+    {
+      "customerName": "Sarvesh",
+      "customerEmail": "shahanesarvesh45@gmail.com",
+      "customerPhone": "7507981647",
+      "requestedDate": "2026-08-10",
+      "requestedTime": "11:30",
+      "duration": 30,
+      "consultationMode": "Direct Phone Call",
+      "service": "Income Tax Planning & Filing",
+      "message": "asfeaf",
+      "status": "ACCEPTED",
+      "id": "BKG-2026-1801",
+      "createdAt": "2026-08-08T09:27:52.383Z",
+      "updatedAt": "2026-08-08T09:28:25.800Z"
+    },
+    {
+      "customerName": "Sarvesh",
+      "customerEmail": "shahanesarvesh45@gmail.com",
+      "customerPhone": "7507981647",
+      "requestedDate": "2026-08-10",
+      "requestedTime": "10:30",
+      "duration": 30,
+      "consultationMode": "Office Visit (Vikaspuri)",
+      "service": "GST Registration & Refunds",
+      "message": "I got scammed",
+      "status": "ACCEPTED",
+      "id": "BKG-2026-2960",
+      "createdAt": "2026-08-08T09:16:25.712Z",
+      "updatedAt": "2026-08-08T09:19:04.454Z"
+    },
+    {
+      "id": "BKG-2026-001",
+      "customerName": "Sanjay Singhania",
+      "customerEmail": "sanjay@singhaniatech.com",
+      "customerPhone": "+91 98123 45678",
+      "requestedDate": "2026-08-10",
+      "requestedTime": "11:00",
+      "duration": 30,
+      "consultationMode": "Online Video Call",
+      "service": "Income Tax Advisory",
+      "message": "Need urgent advisory regarding cross-border software royalty taxation.",
+      "status": "ACCEPTED",
+      "createdAt": "2026-08-05T09:30:00.000Z",
+      "updatedAt": "2026-08-05T10:00:00.000Z"
+    },
+    {
+      "id": "BKG-2026-002",
+      "customerName": "Neha Kapoor",
+      "customerEmail": "neha.k@kapoorfashion.in",
+      "customerPhone": "+91 99887 66554",
+      "requestedDate": "2026-08-11",
+      "requestedTime": "14:30",
+      "duration": 30,
+      "consultationMode": "Office Visit (Vikaspuri)",
+      "service": "GST Registration & Refunds",
+      "message": "Seeking assistance with export GST refund claims under LUT.",
+      "status": "PENDING",
+      "createdAt": "2026-08-07T14:15:00.000Z",
+      "updatedAt": "2026-08-07T14:15:00.000Z"
+    }
+  ],
+  "messages": [
+    {
+      "id": "MSG-001",
+      "bookingId": "BKG-2026-001",
+      "senderType": "CUSTOMER",
+      "senderName": "Sanjay Singhania",
+      "senderEmail": "sanjay@singhaniatech.com",
+      "message": "Need urgent advisory regarding cross-border software royalty taxation.",
+      "createdAt": "2026-08-05T09:30:00.000Z"
+    },
+    {
+      "id": "MSG-002",
+      "bookingId": "BKG-2026-001",
+      "senderType": "SYSTEM",
+      "senderName": "System",
+      "senderEmail": "system@pacoadvisory.com",
+      "message": "Booking status changed to ACCEPTED.",
+      "createdAt": "2026-08-05T10:00:00.000Z"
+    },
+    {
+      "id": "MSG-003",
+      "bookingId": "BKG-2026-002",
+      "senderType": "CUSTOMER",
+      "senderName": "Neha Kapoor",
+      "senderEmail": "neha.k@kapoorfashion.in",
+      "message": "Seeking assistance with export GST refund claims under LUT.",
+      "createdAt": "2026-08-07T14:15:00.000Z"
+    },
+    {
+      "id": "MSG-1786180585712-758",
+      "bookingId": "BKG-2026-2960",
+      "senderType": "CUSTOMER",
+      "senderName": "Sarvesh",
+      "senderEmail": "shahanesarvesh45@gmail.com",
+      "message": "I got scammed",
+      "createdAt": "2026-08-08T09:16:25.712Z"
+    },
+    {
+      "id": "MSG-1786180695582-177",
+      "bookingId": "BKG-2026-2960",
+      "senderType": "SYSTEM",
+      "senderName": "System",
+      "senderEmail": "system@pacoadvisory.com",
+      "message": "Booking status updated to ACCEPTED.",
+      "createdAt": "2026-08-08T09:18:15.582Z"
+    },
+    {
+      "id": "MSG-1786180744454-124",
+      "bookingId": "BKG-2026-2960",
+      "senderType": "ADMIN",
+      "senderName": "Mr. Pankaj Agrawal (FCA)",
+      "senderEmail": "pankaj@pacoadvisory.com",
+      "message": "Sure",
+      "createdAt": "2026-08-08T09:19:04.454Z"
+    },
+    {
+      "id": "MSG-1786181272383-11",
+      "bookingId": "BKG-2026-1801",
+      "senderType": "CUSTOMER",
+      "senderName": "Sarvesh",
+      "senderEmail": "shahanesarvesh45@gmail.com",
+      "message": "asfeaf",
+      "createdAt": "2026-08-08T09:27:52.383Z"
+    },
+    {
+      "id": "MSG-1786181305800-858",
+      "bookingId": "BKG-2026-1801",
+      "senderType": "SYSTEM",
+      "senderName": "System",
+      "senderEmail": "system@pacoadvisory.com",
+      "message": "Booking status updated to ACCEPTED.",
+      "createdAt": "2026-08-08T09:28:25.800Z"
+    },
+    {
+      "id": "MSG-1786375165146-463",
+      "bookingId": "BKG-2026-5993",
+      "senderType": "CUSTOMER",
+      "senderName": "Sarvesh",
+      "senderEmail": "shahanesarvesh45@gmail.com",
+      "message": "I got scammed",
+      "createdAt": "2026-08-10T15:19:25.146Z"
+    },
+    {
+      "id": "MSG-1786375210278-994",
+      "bookingId": "BKG-2026-5993",
+      "senderType": "SYSTEM",
+      "senderName": "System",
+      "senderEmail": "system@pacoadvisory.com",
+      "message": "Booking status updated to ACCEPTED.",
+      "createdAt": "2026-08-10T15:20:10.278Z"
+    },
+    {
+      "id": "MSG-1786375210486-795",
+      "bookingId": "BKG-2026-5993",
+      "senderType": "SYSTEM",
+      "senderName": "System",
+      "senderEmail": "system@pacoadvisory.com",
+      "message": "Booking status updated to ACCEPTED.",
+      "createdAt": "2026-08-10T15:20:10.486Z"
+    },
+    {
+      "id": "MSG-1786375213831-123",
+      "bookingId": "BKG-2026-5993",
+      "senderType": "SYSTEM",
+      "senderName": "System",
+      "senderEmail": "system@pacoadvisory.com",
+      "message": "Booking status updated to ACCEPTED.",
+      "createdAt": "2026-08-10T15:20:13.831Z"
+    },
+    {
+      "id": "MSG-1786375247113-465",
+      "bookingId": "BKG-2026-5993",
+      "senderType": "ADMIN",
+      "senderName": "Mr. Pankaj Agrawal (FCA)",
+      "senderEmail": "pankaj@pacoadvisory.com",
+      "message": "link fpjwef",
+      "createdAt": "2026-08-10T15:20:47.113Z"
+    }
+  ]
+}

@@ -46,7 +46,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Pankaj Agrawal & Co | Chartered Accountants",
     description:
-      "Helping Businesses & Individuals navigate Taxation, GST, Audits, and Regulatory Compliance with Professional Excellence.",
+      "Helping Businesses & Individuals navigate Taxation, GST, Audits, and Regulatory Compliance through Technical Competence",
   },
   robots: {
     index: true,

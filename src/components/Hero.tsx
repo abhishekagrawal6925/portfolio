@@ -139,24 +139,11 @@ export default function Hero({ onOpenConsultation }: HeroProps) {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-          
+
           {/* Main Hero Text */}
           <div className="lg:col-span-7 flex flex-col items-start text-left space-y-5">
-            
-            {/* Qualification Badge */}
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4 }}
-              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-[#D99B7F]/40 shadow-xs text-xs font-semibold text-[#FAF2EE] hover:border-[#D99B7F] transition-colors cursor-default"
-            >
-              <ShieldCheck className="w-4 h-4 text-[#D99B7F]" />
-              <span>Nov 2024 Qualified Chartered Accountant Firm</span>
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#D99B7F] opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-[#D99B7F]"></span>
-              </span>
-            </motion.div>
+
+
 
             {/* Main Headline */}
             <motion.h1
@@ -165,7 +152,7 @@ export default function Hero({ onOpenConsultation }: HeroProps) {
               transition={{ duration: 0.4, delay: 0.05 }}
               className="font-sans text-3xl sm:text-5xl lg:text-6xl font-bold text-white tracking-tight leading-[1.15]"
             >
-              Trusted Chartered Accountants for Taxation, Compliance &amp; Advisory
+              Chartered Accountants for Taxation, Compliance &amp; Advisory
             </motion.h1>
 
             {/* Subheading */}
@@ -175,7 +162,7 @@ export default function Hero({ onOpenConsultation }: HeroProps) {
               transition={{ duration: 0.4, delay: 0.1 }}
               className="text-base sm:text-lg text-[#FAF2EE]/90 font-normal leading-relaxed max-w-2xl"
             >
-              Helping Businesses &amp; Individuals navigate Taxation, GST, Audits, and Regulatory Compliance with Professional Excellence.
+              Helping Businesses &amp; Individuals navigate Taxation, GST, Audits, and Regulatory Compliance through Technical Competence.
             </motion.p>
 
             {/* Action Buttons */}
@@ -210,7 +197,7 @@ export default function Hero({ onOpenConsultation }: HeroProps) {
             >
               <div className="flex items-center gap-1.5 hover:text-white transition-colors">
                 <div className="w-1.5 h-1.5 rounded-full bg-[#D99B7F]" />
-                <span>100% Statutory Accuracy</span>
+                <span>Comprehensive Compliance Support</span>
               </div>
               <div className="flex items-center gap-1.5 hover:text-white transition-colors">
                 <div className="w-1.5 h-1.5 rounded-full bg-[#D99B7F]" />
@@ -273,10 +260,6 @@ export default function Hero({ onOpenConsultation }: HeroProps) {
                   <span className="font-sans font-normal text-white/50">&amp;</span>
                   <span>Co.</span>
                 </div>
-                <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-white/10 border border-white/20 text-[10px] font-mono font-bold text-white uppercase tracking-tight shadow-2xs">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#D99B7F] animate-pulse" />
-                  <span>ICAI Registered</span>
-                </div>
               </div>
 
               {/* Central Logo & Information */}
@@ -285,14 +268,12 @@ export default function Hero({ onOpenConsultation }: HeroProps) {
                 <motion.div
                   whileHover={{ scale: 1.05, rotate: 2 }}
                   transition={{ type: "spring", stiffness: 300 }}
-                  className="relative w-14 h-14 mx-auto mb-3.5 rounded-2xl bg-[#D99B7F] text-[#0F3040] flex flex-col items-center justify-center font-sans shadow-lg select-none leading-none p-1.5 overflow-hidden group/logo"
+                  className="relative inline-flex items-center justify-center h-11 px-4 mx-auto mb-3.5 rounded-2xl bg-[#D99B7F] text-[#0F3040] gap-1.5 font-sans shadow-lg select-none leading-none overflow-hidden group/logo"
                 >
                   {/* Metallic Shimmer Streak */}
                   <div className="absolute inset-0 -translate-x-full group-hover/logo:translate-x-full bg-gradient-to-r from-transparent via-white/40 to-transparent transition-transform duration-700 ease-in-out" />
-                  
-                  <span className="text-xl font-bold tracking-tight text-[#0F3040]">PA</span>
-                  <div className="w-6 h-[1.5px] bg-[#0F3040]/40 my-0.5 rounded-full" />
-                  <span className="text-[11px] font-bold tracking-tight text-[#0F3040]">CO</span>
+
+                  <span className="text-base sm:text-lg font-bold tracking-tight text-[#0F3040]">PA&amp;CO</span>
                 </motion.div>
 
                 <h3 className="font-sans text-lg sm:text-xl font-bold text-white tracking-tight">
@@ -352,9 +333,8 @@ export default function Hero({ onOpenConsultation }: HeroProps) {
                   }}
                   onMouseEnter={() => setActiveCardIndex(idx)}
                   onMouseLeave={() => setActiveCardIndex(null)}
-                  className={`absolute ${card.position} bg-[#464858]/90 backdrop-blur-md p-3.5 rounded-2xl shadow-xl border ${
-                    isActive ? "border-[#D99B7F] ring-2 ring-[#D99B7F]/30" : "border-white/20"
-                  } flex items-center gap-3 z-20 max-w-[205px] hidden sm:flex text-white gpu-layer cursor-pointer transition-colors duration-200`}
+                  className={`absolute ${card.position} bg-[#464858]/90 backdrop-blur-md p-3.5 rounded-2xl shadow-xl border ${isActive ? "border-[#D99B7F] ring-2 ring-[#D99B7F]/30" : "border-white/20"
+                    } flex items-center gap-3 z-20 max-w-[205px] hidden sm:flex text-white gpu-layer cursor-pointer transition-colors duration-200`}
                 >
                   <div
                     className={cn(

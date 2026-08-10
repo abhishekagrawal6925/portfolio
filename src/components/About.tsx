@@ -31,7 +31,7 @@ export default function About() {
       icon: UserCheck,
     },
     {
-      title: "Client-Centric Approach",
+      title: "Professional Approach",
       desc: "Tailored financial advisory aligned with your specific business goals.",
       icon: Compass,
     },
@@ -74,10 +74,10 @@ export default function About() {
   return (
     <section id="about" className="py-24 bg-[#FAF2EE] text-[#0F3040] relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         {/* Main Split Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-          
+
           {/* Left Column: CA Profile Photo */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
@@ -87,7 +87,7 @@ export default function About() {
             className="lg:col-span-5 relative"
           >
             <div className="relative mx-auto max-w-md lg:max-w-none">
-              
+
               {/* Profile Photo Frame */}
               <div
                 onClick={() =>
@@ -108,14 +108,14 @@ export default function About() {
                   sizes="(max-width: 768px) 100vw, 50vw"
                   priority
                 />
-                
+
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-transparent to-transparent" />
 
                 {/* Quick Zoom Overlay Icon */}
                 <div className="absolute top-4 right-4 p-2 rounded-full bg-white/20 backdrop-blur-md text-white opacity-0 group-hover:opacity-100 transition-opacity">
                   <Maximize2 className="w-4 h-4" />
                 </div>
-                
+
                 {/* Photo Details */}
                 <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
                   <div className="inline-block px-3 py-1 rounded-full bg-white/20 backdrop-blur-md text-[11px] font-semibold tracking-wider uppercase mb-2">
@@ -169,10 +169,10 @@ export default function About() {
 
             <div className="space-y-4 mt-6 text-slate-700 text-base leading-relaxed">
               <p>
-                <strong className="text-slate-900 font-semibold">Pankaj Agrawal & Co.</strong> is a premier Chartered Accountancy firm committed to delivering reliable financial, taxation, and compliance solutions to businesses and individuals across India.
+                <strong className="text-slate-900 font-semibold">Pankaj Agrawal & Co.</strong> is a Chartered Accountancy firm committed to delivering reliable financial, taxation, and compliance solutions to businesses and individuals across India.
               </p>
               <p>
-                Mr. Pankaj Agrawal qualified as a Chartered Accountant in <strong className="text-slate-900 font-semibold">November 2024</strong> and possesses strong expertise in Direct and Indirect Taxation. Under his leadership, the firm specializes in statutory audits, GST compliance, income tax planning, and ROC advisory.
+                Mr. Pankaj Agrawal qualified as a Chartered Accountant in <strong className="text-slate-900 font-semibold">November 2024</strong> and possesses expertise in Direct and Indirect Taxation. Under his leadership, the firm specializes in statutory audits, GST compliance, income tax planning, and ROC advisory.
               </p>
               <p className="text-sm text-slate-700 italic border-l-2 border-slate-800 pl-4 py-1 bg-gray-50 rounded-r-lg">
                 &ldquo;Our objective is to provide timely, transparent, and practical financial solutions while helping clients remain fully compliant with statutory regulations.&rdquo;
