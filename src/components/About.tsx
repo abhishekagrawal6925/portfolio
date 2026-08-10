@@ -41,12 +41,12 @@ export default function About() {
       icon: ShieldCheck,
     },
     {
-      title: "Timely Compliance",
+      title: "Assistance with Timely Compliance",
       desc: "Strict adherence to filing deadlines avoiding interest and penal charges.",
       icon: Clock,
     },
     {
-      title: "Personalized Solutions",
+      title: "Tailored Professional Services",
       desc: "Dedicated personal involvement from proprietor for every engagement.",
       icon: CheckCircle2,
     },
@@ -169,7 +169,7 @@ export default function About() {
 
             <div className="space-y-4 mt-6 text-slate-700 text-base leading-relaxed">
               <p>
-                <strong className="text-slate-900 font-semibold">Pankaj Agrawal & Co.</strong> is a Chartered Accountancy firm committed to delivering reliable financial, taxation, and compliance solutions to businesses and individuals across India.
+                <strong className="text-slate-900 font-semibold">Pankaj Agrawal & Co.</strong> is a Chartered Accountancy firm providing professional services in audit, taxation, GST, corporate compliance & advisory to businesses & individuals.
               </p>
               <p>
                 Mr. Pankaj Agrawal qualified as a Chartered Accountant in <strong className="text-slate-900 font-semibold">November 2024</strong> and possesses expertise in Direct and Indirect Taxation. Under his leadership, the firm specializes in statutory audits, GST compliance, income tax planning, and ROC advisory.
