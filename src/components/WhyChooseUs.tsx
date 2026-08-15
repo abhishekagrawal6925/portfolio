@@ -13,37 +13,37 @@ interface WhyChooseUsProps {
 export default function WhyChooseUs({ onOpenConsultation }: WhyChooseUsProps) {
   const cards = [
     {
-      title: "Professional Expertise",
+      title: "Professional Knowledge",
       subtitle: "In-Depth Domain Knowledge",
-      desc: "Up-to-date expertise in complex Direct and Indirect Taxation, GST litigation, and MCA regulatory compliances backed by rigorous CA standards.",
+      desc: "Professinal knowledge and experience in Direct & Indirect Taxation, GST, audit and regulatory compliance, supported by rigorous professional standards.",
       icon: Award,
       badge: "Expert CA Oversight",
     },
     {
-      title: "Timely Compliance",
+      title: "Structured Compliance Support",
       subtitle: "Zero Penalty Assurance",
-      desc: "Systematic filing schedules ensuring statutory returns (GST, Income Tax, ROC) are submitted error-free well before due dates.",
+      desc: "Systematic compliance processes designed to help businesses meet applicable statutory and regulatory requirements within prescribed timelines.",
       icon: Clock,
       badge: "Punctual Filings",
     },
     {
-      title: "Personalized Advisory",
+      title: "Practical Professional Guidance",
       subtitle: "Custom Tailored Strategy",
-      desc: "Direct engagement with Mr. Pankaj Agrawal to craft practical tax saving strategies and customized business structures.",
+      desc: "Direct professional engagement to understand business requirements and provide practical guidance suited to the circumstances of each assignment.",
       icon: HeartHandshake,
       badge: "Proprietor Driven",
     },
     {
-      title: "Transparent & Reliable",
+      title: "Professional & Transparent Approach",
       subtitle: "End-to-End Partnership",
-      desc: "Prompt responsiveness, transparent fee structures, and dedicated statutory support whenever tax notices or queries arise.",
+      desc: "Clear communication, transparent fee arrangements and professional support throught the engagement.",
       icon: ShieldCheck,
       badge: "Always Accessible",
     },
   ];
 
   return (
-    <section id="why-us" className="py-24 bg-[#FAF2EE] relative overflow-hidden">
+    <section id="our-values" className="py-24 bg-[#FAF2EE] relative overflow-hidden">
       <GridPattern
         width={32}
         height={32}
@@ -54,7 +54,7 @@ export default function WhyChooseUs({ onOpenConsultation }: WhyChooseUsProps) {
         )}
       />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
           <motion.div
@@ -83,7 +83,7 @@ export default function WhyChooseUs({ onOpenConsultation }: WhyChooseUsProps) {
             transition={{ delay: 0.2 }}
             className="text-base text-[#464858] mt-4 leading-relaxed"
           >
-            We focus on mitigating financial risks, optimizing tax liabilities, and ensuring your business stays 100% compliant with Indian tax laws.
+            We provide professional guidance across taxation, audit, accounting and regulatory compliance, with a focus on sound financial practices and informed business decisionns.
           </motion.p>
         </div>
 
@@ -124,10 +124,25 @@ export default function WhyChooseUs({ onOpenConsultation }: WhyChooseUsProps) {
                   </p>
                 </div>
 
-                <div className="pt-6 mt-6 border-t border-[#A56F63]/15 flex items-center justify-between text-xs font-semibold text-[#0F3040] group-hover:text-[#A56F63] transition-colors">
+                <a
+                  href="#services"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    const element = document.getElementById("services");
+                    if (element) {
+                      const navHeaderHeight = 70;
+                      const targetPosition = element.offsetTop - navHeaderHeight;
+                      window.scrollTo({
+                        top: targetPosition,
+                        behavior: "smooth",
+                      });
+                    }
+                  }}
+                  className="pt-6 mt-6 border-t border-[#A56F63]/15 flex items-center justify-between text-xs font-semibold text-[#0F3040] group-hover:text-[#A56F63] transition-colors cursor-pointer"
+                >
                   <span>Learn More</span>
                   <ArrowRight className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" />
-                </div>
+                </a>
               </motion.div>
             );
           })}
@@ -142,17 +157,29 @@ export default function WhyChooseUs({ onOpenConsultation }: WhyChooseUsProps) {
           className="mt-16 bg-[#0F3040] text-white rounded-2xl p-8 sm:p-10 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-xl border border-[#D99B7F]/30"
         >
           <div className="text-center sm:text-left space-y-1">
-            <h3 className="font-sans text-2xl font-bold text-white">Need Immediate Tax &amp; Statutory Assistance?</h3>
+            <h3 className="font-sans text-2xl font-bold text-white">Tax & Regulatory Compliance</h3>
             <p className="text-xs sm:text-sm text-[#FAF2EE]/80 max-w-xl">
-              Connect directly with Mr. Pankaj Agrawal for GST refunds, Income Tax notices, or ROC annual filings.
+              Professional services relating to GST, Income Tax and corporate regulatory matters.
             </p>
           </div>
-          <button
-            onClick={onOpenConsultation}
-            className="shrink-0 px-6 py-3.5 rounded-xl bg-[#D99B7F] text-[#0F3040] font-bold text-xs uppercase tracking-wider hover:bg-[#c88b6f] transition-colors shadow-sm cursor-pointer"
+          <a
+            href="#services"
+            onClick={(e) => {
+              e.preventDefault();
+              const element = document.getElementById("services");
+              if (element) {
+                const navHeaderHeight = 70;
+                const targetPosition = element.offsetTop - navHeaderHeight;
+                window.scrollTo({
+                  top: targetPosition,
+                  behavior: "smooth",
+                });
+              }
+            }}
+            className="shrink-0 px-6 py-3.5 rounded-xl bg-[#D99B7F] text-[#0F3040] font-bold text-xs uppercase tracking-wider hover:bg-[#c88b6f] transition-colors shadow-sm cursor-pointer inline-flex items-center justify-center"
           >
-            Schedule Advisory Call
-          </button>
+            View Services
+          </a>
         </motion.div>
 
       </div>

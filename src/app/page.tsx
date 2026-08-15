@@ -9,7 +9,6 @@ import About from "@/components/About";
 import WhyChooseUs from "@/components/WhyChooseUs";
 import Services from "@/components/Services";
 import Process from "@/components/Process";
-import Stats from "@/components/Stats";
 import FAQ from "@/components/FAQ";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
@@ -48,10 +47,7 @@ export default function Home() {
       {/* 5. Process */}
       <Process />
 
-      {/* 6. Experience / Stats */}
-      <Stats />
-
-      {/* 7. FAQs */}
+      {/* 6. FAQs */}
       <FAQ />
 
       {/* 8. Contact */}

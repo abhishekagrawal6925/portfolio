@@ -11,7 +11,7 @@ interface NavbarProps {
 const navLinks = [
   { name: "Home", href: "#hero" },
   { name: "About", href: "#about" },
-  { name: "Our Values", href: "#values" },
+  { name: "Our Values", href: "#our-values" },
   { name: "Services", href: "#services" },
   { name: "Process", href: "#process" },
   { name: "FAQs", href: "#faqs" },
