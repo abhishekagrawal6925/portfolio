@@ -90,9 +90,9 @@ async function sendViaSmtp({ to, subject, html }: SendEmailParams): Promise<Emai
  * Send Email via Resend REST API (Primary for Client -> Admin slot booking notifications)
  */
 async function sendViaResend({ to, subject, html }: SendEmailParams): Promise<EmailResult> {
-  const resendApiKey = getResendApiKey();
-  const fromEmail = getFromEmail();
-  const adminEmail = getAdminEmail();
+  const resendApiKey = getResendApiKey().trim();
+  const fromEmail = getFromEmail().trim();
+  const adminEmail = getAdminEmail().trim();
 
   if (!resendApiKey) {
     console.warn("[EmailService - Resend] RESEND_API key not configured.");
@@ -132,18 +132,23 @@ async function sendViaResend({ to, subject, html }: SendEmailParams): Promise<Em
     });
 
     const data = await res.json();
+    const dataString = JSON.stringify(data).toLowerCase();
+
     if (!res.ok) {
       // Handle Resend testing restriction (free tier onboarding@resend.dev limits direct send to non-verified addresses)
-      if (res.status === 403 && data.message?.includes("only send testing emails to your own email address")) {
+      if (
+        res.status === 403 &&
+        (dataString.includes("testing email") || dataString.includes("only send") || dataString.includes("domain"))
+      ) {
         console.warn(
-          `[EmailService - Resend Sandbox] Resend free tier restricted delivery to '${to}'. Forwarding to admin email '${adminEmail}'.`
+          `[EmailService - Resend Sandbox] Resend restricted delivery to '${to}'. Forwarding to admin email '${adminEmail}'.`
         );
 
         const sandboxNoticeHtml = `
           <div style="background-color: #FEF3C7; border: 1px solid #F59E0B; padding: 12px 16px; border-radius: 8px; font-size: 12px; color: #92400E; margin-bottom: 20px;">
-            <strong>Resend Testing Mode Notice:</strong> This email was intended for client recipient <code>${to}</code>.
-            Delivered to verified account email <code>${adminEmail}</code> because Resend is in free testing tier.<br><br>
-            <strong>To send directly via SMTP:</strong> Set <code>SMTP_EMAIL</code> and <code>SMTP_PASSWORD</code> in your <code>.env</code> file.
+            <strong>Resend Testing Mode Notice:</strong> This email was intended for recipient <code>${to}</code>.<br>
+            Delivered to verified account owner email <code>${adminEmail}</code> because Resend is in free testing tier with <code>onboarding@resend.dev</code>.<br><br>
+            <strong>To send to any recipient:</strong> Add and verify your custom domain in your Resend Dashboard (resend.com/domains).
           </div>
           ${html}
         `;
@@ -169,7 +174,8 @@ async function sendViaResend({ to, subject, html }: SendEmailParams): Promise<Em
       }
 
       console.error("[EmailService - Resend] API error:", data);
-      return { success: false, error: data.message || "Failed to send email via Resend" };
+      const errMsg = data.message || data.error?.message || data.error || "Failed to send email via Resend";
+      return { success: false, error: typeof errMsg === "string" ? errMsg : JSON.stringify(errMsg) };
     }
 
     console.log(`[EmailService - Resend] Email sent successfully to ${to}. Id: ${data.id}`);
