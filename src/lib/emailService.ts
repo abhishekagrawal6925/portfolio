@@ -57,9 +57,9 @@ function getSmtpTransporter() {
 }
 
 /**
- * Send Email via Nodemailer SMTP (Primary for Admin replies & status updates to client)
+ * Direct SMTP send helper without circular fallback
  */
-async function sendViaSmtp({ to, subject, html }: SendEmailParams): Promise<EmailResult> {
+async function sendViaSmtpDirect({ to, subject, html }: SendEmailParams): Promise<EmailResult> {
   const { user } = getSmtpCredentials();
   const transporter = getSmtpTransporter();
 
@@ -76,13 +76,21 @@ async function sendViaSmtp({ to, subject, html }: SendEmailParams): Promise<Emai
     } catch (err: unknown) {
       const error = err as Error;
       console.error("[EmailService - SMTP] Error sending via SMTP:", error.message);
-      // Fallback to Resend below if SMTP fails
+      return { success: false, error: error.message };
     }
-  } else {
-    console.warn("[EmailService - SMTP] SMTP_EMAIL and SMTP_PASSWORD not configured. Falling back to Resend API.");
   }
+  return { success: false, error: "SMTP credentials not configured." };
+}
 
-  // Fallback to Resend API if SMTP unavailable or failed
+/**
+ * Send Email via Nodemailer SMTP (Primary for Admin replies & status updates to client)
+ */
+async function sendViaSmtp({ to, subject, html }: SendEmailParams): Promise<EmailResult> {
+  const smtpRes = await sendViaSmtpDirect({ to, subject, html });
+  if (smtpRes.success) {
+    return smtpRes;
+  }
+  console.warn("[EmailService - SMTP] SMTP failed or not configured. Falling back to Resend API.");
   return sendViaResend({ to, subject, html });
 }
 
@@ -95,25 +103,8 @@ async function sendViaResend({ to, subject, html }: SendEmailParams): Promise<Em
   const adminEmail = getAdminEmail().trim();
 
   if (!resendApiKey) {
-    console.warn("[EmailService - Resend] RESEND_API key not configured.");
-    // Fallback to SMTP if Resend key is missing
-    const { user } = getSmtpCredentials();
-    const transporter = getSmtpTransporter();
-    if (transporter && user) {
-      try {
-        const info = await transporter.sendMail({
-          from: `Pankaj Agrawal & Co. <${user}>`,
-          to,
-          subject,
-          html,
-        });
-        return { success: true, id: info.messageId };
-      } catch (err: unknown) {
-        const error = err as Error;
-        return { success: false, error: error.message };
-      }
-    }
-    return { success: false, error: "No email delivery service configured." };
+    console.warn("[EmailService - Resend] RESEND_API key not configured. Falling back to SMTP.");
+    return sendViaSmtpDirect({ to, subject, html });
   }
 
   try {
@@ -140,14 +131,18 @@ async function sendViaResend({ to, subject, html }: SendEmailParams): Promise<Em
         res.status === 403 &&
         (dataString.includes("testing email") || dataString.includes("only send") || dataString.includes("domain"))
       ) {
+        // Extract verified Resend account owner email dynamically from Resend's 403 error message
+        const match = typeof data.message === "string" ? data.message.match(/own email address \(([^)]+)\)/i) : null;
+        const ownerEmail = match ? match[1].trim() : (adminEmail || "shahan77_soe@jnu.ac.in");
+
         console.warn(
-          `[EmailService - Resend Sandbox] Resend restricted delivery to '${to}'. Forwarding to admin email '${adminEmail}'.`
+          `[EmailService - Resend Sandbox] Resend restricted delivery to '${to}'. Forwarding to verified account owner '${ownerEmail}'.`
         );
 
         const sandboxNoticeHtml = `
           <div style="background-color: #FEF3C7; border: 1px solid #F59E0B; padding: 12px 16px; border-radius: 8px; font-size: 12px; color: #92400E; margin-bottom: 20px;">
             <strong>Resend Testing Mode Notice:</strong> This email was intended for recipient <code>${to}</code>.<br>
-            Delivered to verified account owner email <code>${adminEmail}</code> because Resend is in free testing tier with <code>onboarding@resend.dev</code>.<br><br>
+            Delivered to verified account owner email <code>${ownerEmail}</code> because Resend is using free testing sender <code>onboarding@resend.dev</code>.<br><br>
             <strong>To send to any recipient:</strong> Add and verify your custom domain in your Resend Dashboard (resend.com/domains).
           </div>
           ${html}
@@ -161,19 +156,25 @@ async function sendViaResend({ to, subject, html }: SendEmailParams): Promise<Em
           },
           body: JSON.stringify({
             from: fromEmail,
-            to: [adminEmail],
-            subject: `[Sandbox -> ${to}] ${subject}`,
+            to: [ownerEmail],
+            subject: `[Resend Sandbox -> ${to}] ${subject}`,
             html: sandboxNoticeHtml,
           }),
         });
 
         const fallbackData = await fallbackRes.json();
         if (fallbackRes.ok) {
+          console.log(`[EmailService - Resend] Successfully sent sandbox fallback email to ${ownerEmail}. Id: ${fallbackData.id}`);
           return { success: true, id: fallbackData.id };
         }
       }
 
-      console.error("[EmailService - Resend] API error:", data);
+      console.error("[EmailService - Resend] API error, attempting SMTP fallback:", data);
+      const smtpFallbackRes = await sendViaSmtpDirect({ to, subject, html });
+      if (smtpFallbackRes.success) {
+        return smtpFallbackRes;
+      }
+
       const errMsg = data.message || data.error?.message || data.error || "Failed to send email via Resend";
       return { success: false, error: typeof errMsg === "string" ? errMsg : JSON.stringify(errMsg) };
     }
@@ -182,8 +183,8 @@ async function sendViaResend({ to, subject, html }: SendEmailParams): Promise<Em
     return { success: true, id: data.id };
   } catch (err: unknown) {
     const error = err as Error;
-    console.error("[EmailService - Resend] Network error:", error.message);
-    return { success: false, error: error.message };
+    console.error("[EmailService - Resend] Network error, attempting SMTP fallback:", error.message);
+    return sendViaSmtpDirect({ to, subject, html });
   }
 }
 
