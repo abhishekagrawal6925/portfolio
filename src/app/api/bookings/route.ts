@@ -68,8 +68,8 @@ export async function POST(request: Request) {
       status: "PENDING",
     });
 
-    // Dispatch email notification to admin asynchronously (non-blocking for UI speed)
-    sendNewBookingNotificationToAdmin(booking).catch((err) => {
+    // Dispatch email notification to admin (must await so Vercel Serverless container doesn't terminate early)
+    await sendNewBookingNotificationToAdmin(booking).catch((err) => {
       console.error("[POST /api/bookings] Admin email dispatch error:", err);
     });
 
