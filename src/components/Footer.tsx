@@ -74,7 +74,7 @@ export default function Footer() {
               className="pt-3 flex items-center gap-3.5"
             >
               <div className="h-10 px-3 rounded-xl bg-[#D99B7F] text-[#0F3040] flex items-center justify-center gap-1 font-sans shadow-sm select-none leading-none shrink-0">
-                <span className="text-xs sm:text-sm font-bold tracking-tight text-[#0F3040]">PA&amp;CO</span>
+                <span className="text-xs sm:text-sm font-bold tracking-tight text-[#0F3040]">PACO</span>
               </div>
               <div className="flex flex-col">
                 <span className="font-sans font-bold text-base tracking-wide text-white uppercase leading-tight">

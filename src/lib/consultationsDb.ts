@@ -1,5 +1,6 @@
 import fs from "fs";
 import path from "path";
+import os from "os";
 
 export interface TimeRange {
   id: string;
@@ -57,8 +58,12 @@ export interface DatabaseSchema {
   messages: BookingMessage[];
 }
 
-const DATA_DIR = path.join(process.cwd(), "src", "data");
-const DB_FILE = path.join(DATA_DIR, "consultations.json");
+const PRIMARY_DATA_DIR = path.join(process.cwd(), "src", "data");
+const PRIMARY_DB_FILE = path.join(PRIMARY_DATA_DIR, "consultations.json");
+const TMP_DB_FILE = path.join(os.tmpdir(), "consultations.json");
+
+// In-memory cache for fast reads and fallback in serverless runtimes
+let inMemoryDb: DatabaseSchema | null = null;
 
 const DEFAULT_AVAILABILITY: WeeklyAvailability = {
   durationMinutes: 30,
@@ -172,47 +177,79 @@ const INITIAL_MESSAGES: BookingMessage[] = [
   },
 ];
 
-function ensureDataDirectoryExists() {
-  if (!fs.existsSync(DATA_DIR)) {
-    fs.mkdirSync(DATA_DIR, { recursive: true });
-  }
-}
-
 export function readDb(): DatabaseSchema {
-  ensureDataDirectoryExists();
-  if (!fs.existsSync(DB_FILE)) {
-    const initialData: DatabaseSchema = {
-      availability: DEFAULT_AVAILABILITY,
-      bookings: INITIAL_BOOKINGS,
-      messages: INITIAL_MESSAGES,
-    };
-    fs.writeFileSync(DB_FILE, JSON.stringify(initialData, null, 2), "utf-8");
-    return initialData;
+  if (inMemoryDb) {
+    return inMemoryDb;
   }
 
-  try {
-    const raw = fs.readFileSync(DB_FILE, "utf-8");
-    const data = JSON.parse(raw) as DatabaseSchema;
-    if (!data.availability || !data.bookings) {
-      throw new Error("Invalid schema structure");
+  // 1. Try reading from OS temp directory (stores recent changes during serverless runtime)
+  if (fs.existsSync(TMP_DB_FILE)) {
+    try {
+      const raw = fs.readFileSync(TMP_DB_FILE, "utf-8");
+      const data = JSON.parse(raw) as DatabaseSchema;
+      if (data && data.availability && Array.isArray(data.bookings)) {
+        inMemoryDb = data;
+        return inMemoryDb;
+      }
+    } catch {
+      // Fall through if file read fails or corrupt
     }
-    return data;
-  } catch {
-    const resetData: DatabaseSchema = {
-      availability: DEFAULT_AVAILABILITY,
-      bookings: INITIAL_BOOKINGS,
-      messages: INITIAL_MESSAGES,
-    };
-    fs.writeFileSync(DB_FILE, JSON.stringify(resetData, null, 2), "utf-8");
-    return resetData;
   }
+
+  // 2. Try reading from bundled project file (src/data/consultations.json)
+  if (fs.existsSync(PRIMARY_DB_FILE)) {
+    try {
+      const raw = fs.readFileSync(PRIMARY_DB_FILE, "utf-8");
+      const data = JSON.parse(raw) as DatabaseSchema;
+      if (data && data.availability && Array.isArray(data.bookings)) {
+        inMemoryDb = data;
+        return inMemoryDb;
+      }
+    } catch {
+      // Fall through if file read fails or corrupt
+    }
+  }
+
+  // 3. Fallback default
+  inMemoryDb = {
+    availability: DEFAULT_AVAILABILITY,
+    bookings: INITIAL_BOOKINGS,
+    messages: INITIAL_MESSAGES,
+  };
+  return inMemoryDb;
 }
 
 export function writeDb(data: DatabaseSchema): void {
-  ensureDataDirectoryExists();
-  const tempFile = `${DB_FILE}.tmp`;
-  fs.writeFileSync(tempFile, JSON.stringify(data, null, 2), "utf-8");
-  fs.renameSync(tempFile, DB_FILE);
+  inMemoryDb = data;
+  const jsonContent = JSON.stringify(data, null, 2);
+
+  // 1. Try writing to primary project data path (works in local development)
+  try {
+    if (!fs.existsSync(PRIMARY_DATA_DIR)) {
+      fs.mkdirSync(PRIMARY_DATA_DIR, { recursive: true });
+    }
+    const tempFile = `${PRIMARY_DB_FILE}.tmp`;
+    fs.writeFileSync(tempFile, jsonContent, "utf-8");
+    fs.renameSync(tempFile, PRIMARY_DB_FILE);
+    return;
+  } catch (primaryErr) {
+    console.warn(
+      "[consultationsDb] Unable to write to primary project directory (read-only filesystem):",
+      (primaryErr as Error).message
+    );
+  }
+
+  // 2. Fallback: Write to OS temp directory (works in serverless environments like Vercel /tmp)
+  try {
+    const tmpTempFile = `${TMP_DB_FILE}.tmp`;
+    fs.writeFileSync(tmpTempFile, jsonContent, "utf-8");
+    fs.renameSync(tmpTempFile, TMP_DB_FILE);
+  } catch (tmpErr) {
+    console.warn(
+      "[consultationsDb] Unable to write to temp directory:",
+      (tmpErr as Error).message
+    );
+  }
 }
 
 // Data Access Helper Functions

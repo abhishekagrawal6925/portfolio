@@ -273,7 +273,7 @@ export default function Hero({ onOpenConsultation }: HeroProps) {
                   {/* Metallic Shimmer Streak */}
                   <div className="absolute inset-0 -translate-x-full group-hover/logo:translate-x-full bg-gradient-to-r from-transparent via-white/40 to-transparent transition-transform duration-700 ease-in-out" />
 
-                  <span className="text-base sm:text-lg font-bold tracking-tight text-[#0F3040]">PA&amp;CO</span>
+                  <span className="text-base sm:text-lg font-bold tracking-tight text-[#0F3040]">PACO</span>
                 </motion.div>
 
                 <h3 className="font-sans text-lg sm:text-xl font-bold text-white tracking-tight">

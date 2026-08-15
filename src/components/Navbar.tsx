@@ -93,7 +93,7 @@ export default function Navbar({ onOpenConsultation }: NavbarProps) {
           className="flex items-center gap-2.5 group py-0.5"
         >
           <div className="h-9 px-2.5 rounded-xl bg-[#D99B7F] text-[#0F3040] flex items-center justify-center gap-1 font-sans shadow-sm select-none leading-none shrink-0">
-            <span className="text-xs font-bold tracking-tight text-[#0F3040]">PA&CO</span>
+            <span className="text-xs font-bold tracking-tight text-[#0F3040]">PACO</span>
           </div>
           <div className="flex flex-col justify-center">
             <span className="font-sans font-bold text-sm sm:text-base tracking-wide text-white uppercase leading-tight group-hover:text-[#D99B7F] transition-colors">
